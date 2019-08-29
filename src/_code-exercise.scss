@@ -1,0 +1,167 @@
+// variables
+$mm-sample-font-sans-serif: Helvetica, Arial, sans-serif;
+$mm-sample-font-serif:      Georgia, "Times New Roman", Times, serif;
+//kate: keep colors as vars for site wide updating if color changes
+$mm-button-background: yellow;
+$mm-button-hover: lightyellow;
+$mm-link-color: navy;
+$mm-link-hover: darkslateblue;
+
+html {
+  font-size: 62.5%; //why do we set the font size to this value at the html level?
+  position: relative;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+  background-color: #f3f3f3;
+}
+
+header {
+  //nav work is already completed, no need to touch this
+  height: 6rem;
+  background-color: #002f6c;
+  box-sizing: border-box;
+  padding: 2.5rem 0;
+
+  .container {
+    margin-top: -.6rem;
+  }
+
+  img {
+    width: 16rem;
+  }
+}
+
+.container { 
+  margin-top: 5rem; 
+  _width: 460px; /* Take that, IE6! */
+  max-width: 460px;
+}
+@media only screen and (width) { 
+   .container {
+     max-width: 1200px; 
+    }   
+  }
+
+
+//Typography and button styles - included are some placeholders for styling
+//Keep in mind, a component may use one placeholder for a title / etc now but it
+// may change in 6 months and we want to be able to swap via only CSS changes
+//kate: card title font to match h2
+h1, h2, %h2, .card-title {
+  font-family: $mm-sample-font-serif;
+  color: #000;
+}
+
+p, h1, h2, %h2 { margin: 0 0 2rem 0; }
+h1      { font-size: 4rem; }
+//kate: card title font to match h2
+h2, %h2, .card-title { font-size: 3rem; }
+p       { font-size: 1.4rem; }
+//kate restricting width of paragraph following h2
+h2 + p{
+  width: 60%;
+}
+a {
+  color: #005A9F;
+  &:hover {
+    color: #002f6c;
+  }
+}
+
+%eyebrow {
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  line-height: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+
+%subtext {
+  font-size: 1.2rem;
+}
+
+%btn-primary {
+  color: #000;
+  font-size: 1rem;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 1.2rem 4rem;
+  background-color: $mm-button-background;
+  border: 0;
+  border-radius: 0;
+}
+
+//kate: extending button and adding hover
+.ima-button {
+  @extend %btn-primary;
+  font-size: 1.2rem;
+  &:hover {
+    background-color: $mm-button-hover;
+  }
+}
+//kate: extending button and styling as a link
+.ima-link{
+  @extend %btn-primary;
+  color: $mm-link-color;
+  text-transform: none;
+  background-color: transparent;
+  padding: 0;
+  font-size: 1.3rem;
+  &:hover {
+    color: $mm-link-hover;
+    font-size: 1.4rem;
+  }
+}
+//kate: extending eyebrow so as not to impact users of original styles
+.category-title {
+  @extend %eyebrow;
+}
+.mm-card {
+  //kate: float 3 divs and allow resizing
+  float: left;
+  width: 30%;
+  padding-right: 2.2rem;
+  
+  .image {
+    //including some base styles so this shows up in the basic page, feel free to change these
+    height: inherit;
+    min-height: 15rem;
+    //kate: set background props
+    background-repeat: no-repeat;
+    background-position:center;
+  }
+
+  .content {
+    padding: 1.5em; 
+    min-height: 40rem;
+    position: relative;
+    background-color: white;
+    //kate: override bottom margin for second paragraph to keep footer flush
+    p + p {
+      margin-bottom: 0;
+    }
+    footer  {
+      padding-bottom: 2em;
+      //kate: absolute position footer relative to parent div
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+}
+//kate: stack cards on mobile phone
+@media screen and (max-width: 400px) {
+  .mm-card { 
+    float: none;
+    margin-right:0;
+    margin-bottom: 1em;
+    width:auto;
+    padding-right: 0;
+  }
+  h2 + p {
+    width: 95%;
+  }
+}
